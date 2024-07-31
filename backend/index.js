@@ -3,17 +3,10 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db.js";
+import userRoute from "./routes/user.route.js";
 dotenv.config({});
 
-
 const app = express();
-
-// app.get("/test",(req,res)=>{
-//     return res.status(200).json({
-//         message:"Surver is running successfully",
-//         success: true
-//     })
-// })
 
 //middleware
 app.use(express.json());
@@ -27,6 +20,18 @@ app.use(cors(corsOptions));
 
 
 const PORT = process.env.PORT || 3000;
+
+//api's
+
+// app.get("/test",(req,res)=>{
+//     return res.st atus(200).json({
+//         message:"Surver is running successfully",
+//         success: true
+//     })
+// })
+
+app.use("/api/v1/user",userRoute);
+
 app.listen(PORT,()=>{
     connectDB()
     console.log(`Server running at ${PORT}`);
